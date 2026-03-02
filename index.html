@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romain Cochet — Product & UX Designer</title>
+<meta name="description" content="Portfolio de Romain Cochet, Product & UX Designer. Disponible en remote depuis Dijon, France.">
+<meta property="og:title" content="Romain Cochet — Product & UX Designer">
+<meta property="og:description" content="Portfolio en cours de finalisation. Product Designer & UX Researcher, disponible en remote.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://romain-cochet.com">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:           #FAF8F5;
+    --bg-subtle:    #F4F0EB;
+    --surface:      #EEEAE4;
+    --border:       #DDD8D0;
+    --border-light: #EAE6E0;
+    --text-primary:   #1C1916;
+    --text-secondary: #6B5F57;
+    --text-tertiary:  #756860;
+    --text-inverse:   #FAF8F5;
+    --accent:         #A8503A;
+    --accent-brand:   #C0654A;
+    --accent-warm:    #B05840;
+    --accent-light:   #F5EAE5;
+    --accent-dark:    #8F4A35;
+    --sand:           #B5A090;
+    --sand-light:     #F0EAE4;
+    --sand-dark:      #7A6A5E;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ── BACKGROUND ORBS ── */
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(192,101,74,.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    animation: drift1 18s ease-in-out infinite;
+  }
+
+  .bg-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(181,160,144,.1) 0%, transparent 70%);
+    bottom: -50px; left: -80px;
+    animation: drift2 22s ease-in-out infinite;
+  }
+
+  @keyframes drift1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-40px, 40px); }
+  }
+
+  @keyframes drift2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 32px;
+    width: 100%;
+  }
+
+  /* ── NAV ── */
+  nav {
+    padding: 40px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) .1s forwards;
+  }
+
+  .nav-name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--text-primary);
+    letter-spacing: -.01em;
+  }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-brand);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.8); }
+  }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) .2s forwards;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.06;
+    letter-spacing: -.02em;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp .7s var(--ease-out) .3s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .subtitle {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 440px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp .7s var(--ease-out) .4s forwards;
+  }
+
+  /* ── TAGS ROW ── */
+  .tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) .45s forwards;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 9999px;
+  }
+
+  /* ── FORM ── */
+  .form-block {
+    opacity: 0;
+    animation: fadeUp .7s var(--ease-out) .5s forwards;
+  }
+
+  .form-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+  }
+
+  input[type="email"] {
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    min-width: 0;
+  }
+
+  input[type="email"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+
+  input[type="email"]::placeholder {
+    color: var(--sand);
+  }
+
+  .btn-submit {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--accent);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s var(--ease-out), transform .2s var(--ease-out), box-shadow .2s;
+    flex-shrink: 0;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-warm);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(168,80,58,.25);
+  }
+
+  .btn-submit:active {
+    transform: translateY(0);
+    background: var(--accent-dark);
+  }
+
+  /* ── SUCCESS STATE ── */
+  .success-msg {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 14px;
+  }
+
+  .success-msg.visible { display: flex; }
+
+  .success-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    border: 1px solid rgba(168,80,58,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .success-icon svg { width: 11px; height: 11px; stroke: var(--accent); }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 10px;
+    letter-spacing: .01em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin: 56px 0;
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) .6s forwards;
+  }
+
+  /* ── WORK IN PROGRESS ── */
+  .wip-block {
+    opacity: 0;
+    animation: fadeUp .7s var(--ease-out) .65s forwards;
+  }
+
+  .wip-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 16px;
+  }
+
+  .wip-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    transition: transform .2s var(--ease-out), box-shadow .2s;
+  }
+
+  .wip-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(28,25,22,.06);
+  }
+
+  .wip-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .wip-dot.active { background: var(--accent-brand); }
+  .wip-dot.pending { background: var(--border); }
+
+  .wip-text-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .wip-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .wip-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .wip-text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .wip-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 9999px;
+  }
+
+  .wip-badge.in-progress {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+  }
+
+  .wip-badge.soon {
+    background: var(--surface);
+    color: var(--text-tertiary);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-light);
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) .8s forwards;
+  }
+
+  .footer-left {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-link {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color .15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer-link:hover { color: var(--accent); }
+
+  .footer-link svg {
+    width: 13px; height: 13px;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .form-row { flex-direction: column; }
+    .btn-submit { width: 100%; }
+    nav { padding-top: 28px; }
+    main { padding: 60px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="wrapper">
+
+  <nav>
+    <span class="nav-name">Product & UX Designer</span>
+    <span class="nav-status">
+      <span class="status-dot"></span>
+      En cours
+    </span>
+  </nav>
+
+  <main>
+    <p class="eyebrow">Portfolio — Bientôt disponible</p>
+
+    <h1>Product Designer<br><em>UX Researcher.</em></h1>
+
+    <p class="subtitle">
+      Disponible remote — le portfolio est en cours de finalisation.
+    </p>
+
+    <div class="tags">
+      <span class="tag">UX Research</span>
+      <span class="tag">Product Design</span>
+      <span class="tag">iOS</span>
+      <span class="tag">Remote</span>
+    </div>
+
+    <div class="form-block">
+      <label class="form-label" for="email">Recevoir un email à la mise en ligne</label>
+      <div class="form-row">
+        <input type="email" id="email" placeholder="votre@email.com" autocomplete="email">
+        <button class="btn-submit" onclick="handleSubmit()">Notifiez-moi</button>
+      </div>
+      <div class="success-msg" id="success">
+        <span class="success-icon">
+          <svg viewBox="0 0 12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2 6 5 9 10 3"/>
+          </svg>
+        </span>
+        <span id="success-text">Noté — je vous préviens dès que c'est en ligne.</span>
+      </div>
+      <p class="form-note">Un seul email. Pas de spam.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="wip-block">
+      <p class="wip-label">Ce qui est en cours</p>
+      <div class="wip-items">
+        <div class="wip-item">
+          <span class="wip-dot active"></span>
+          <div class="wip-text-block">
+            <span class="wip-title">Brain Dump — de l'idée à l'App Store</span>
+            <span class="wip-desc">Une app iOS de capture rapide, assistée par IA. Étude de cas complète en cours de rédaction : recherche utilisateur, itérations, décisions produit et lancement.</span>
+          </div>
+          <span class="wip-badge soon">Bientôt disponible</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-left">Dijon, France · Disponible remote</span>
+    <div class="footer-right">
+      <a href="https://linkedin.com/in/romain-cochet" class="footer-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="mailto:contact@romain-cochet.com" class="footer-link">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Contact
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ── SUPABASE CONFIG ──
+  // TODO: Replace with your Supabase project credentials
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function handleSubmit() {
+    const input = document.getElementById('email');
+    const success = document.getElementById('success');
+    const successText = document.getElementById('success-text');
+
+    if (!input.value || !input.value.includes('@')) {
+      input.style.borderColor = 'var(--accent)';
+      input.focus();
+      setTimeout(() => { input.style.borderColor = ''; }, 2000);
+      return;
+    }
+
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    const { error } = await supabase
+      .from('subscribers')
+      .insert({ email: input.value.trim().toLowerCase() });
+
+    if (error) {
+      btn.disabled = false;
+      btn.textContent = 'Notifiez-moi';
+
+      if (error.code === '23505') {
+        // Duplicate email
+        successText.textContent = 'Vous êtes déjà inscrit — on vous préviendra !';
+        input.closest('.form-row').style.display = 'none';
+        success.classList.add('visible');
+        return;
+      }
+
+      input.style.borderColor = 'var(--accent)';
+      setTimeout(() => { input.style.borderColor = ''; }, 2000);
+      return;
+    }
+
+    input.closest('.form-row').style.display = 'none';
+    successText.textContent = 'Noté — je vous préviens dès que c\'est en ligne.';
+    success.classList.add('visible');
+  }
+</script>
+
+</body>
+</html>
