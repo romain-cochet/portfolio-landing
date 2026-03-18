@@ -237,10 +237,26 @@ export default function Home() {
             ))}
           </div>
 
+          {/* About */}
+          <div style={{
+            marginBottom: 56,
+            opacity: 0,
+            animation: 'fadeUp 0.7s var(--ease-out) 0.55s forwards',
+          }}>
+            <p style={{
+              fontSize: 16,
+              fontWeight: 300,
+              color: 'var(--text-secondary)',
+              lineHeight: 1.7,
+            }}>
+              De Darty à un projet perso (Cooko), le fil rouge reste le même : le design qui compte, c'est celui qui survit au contact de la réalité — contraintes tech, retours terrain, arbitrages business. En dehors des écrans, quelque part entre Dijon et un sentier de rando.
+            </p>
+          </div>
+
           {/* Projects section */}
           <div style={{
             opacity: 0,
-            animation: 'fadeUp 0.7s var(--ease-out) 0.6s forwards',
+            animation: 'fadeUp 0.7s var(--ease-out) 0.65s forwards',
           }}>
             <p style={{
               fontSize: 11,
