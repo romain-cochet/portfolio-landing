@@ -646,17 +646,14 @@ export default function CaseStudy() {
         }}>
           <Link
             to="/"
+            className="hover-primary"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
               fontSize: 14,
               fontWeight: 500,
-              color: 'var(--text-tertiary)',
-              transition: 'color 0.15s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-tertiary)')}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
@@ -987,16 +984,13 @@ export default function CaseStudy() {
               href="https://linkedin.com/in/romain-cochet"
               target="_blank"
               rel="noopener noreferrer"
+              className="hover-accent"
               style={{
                 fontSize: 12,
-                color: 'var(--text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                transition: 'color 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-tertiary)')}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
@@ -1007,16 +1001,13 @@ export default function CaseStudy() {
             </a>
             <a
               href="mailto:contact@romain-cochet.com"
+              className="hover-accent"
               style={{
                 fontSize: 12,
-                color: 'var(--text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                transition: 'color 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-tertiary)')}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />

@@ -58,18 +58,7 @@ function ProjectCard({
         background: 'var(--bg-subtle)',
         border: '1px solid var(--border-light)',
         borderRadius: 20,
-        transition: 'transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out)',
         cursor: 'pointer',
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.transform = 'translateY(-4px)'
-        el.style.boxShadow = '0 12px 40px rgba(28,26,23,0.10)'
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.transform = 'translateY(0)'
-        el.style.boxShadow = 'none'
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
@@ -272,6 +261,13 @@ export default function Home() {
                 tags={['iOS', 'Product Design', 'UX Research', 'React Native']}
                 year="2025"
               />
+              <ProjectCard
+                slug="recommandations"
+                title="Recommandations accessoires"
+                description="Comment la data terrain et client a révélé que le cross-sell en ligne échouait parce qu'il ignorait le contexte d'achat. Étude vendeurs, analytics Contentsquare et focus group clients chez Fnac/Darty."
+                tags={['UX Research', 'Data Analytics', 'Contentsquare', 'Fnac/Darty']}
+                year="2024"
+              />
             </div>
           </div>
         </main>
@@ -297,16 +293,13 @@ export default function Home() {
               href="https://linkedin.com/in/romain-cochet"
               target="_blank"
               rel="noopener noreferrer"
+              className="hover-accent"
               style={{
                 fontSize: 12,
-                color: 'var(--text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                transition: 'color 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-tertiary)')}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
@@ -317,16 +310,13 @@ export default function Home() {
             </a>
             <a
               href="mailto:contact@romain-cochet.com"
+              className="hover-accent"
               style={{
                 fontSize: 12,
-                color: 'var(--text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                transition: 'color 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-tertiary)')}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />

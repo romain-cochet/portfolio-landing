@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import CaseStudy from './pages/CaseStudy'
+import CaseStudyReco from './pages/CaseStudyReco'
 
 /** Scrolls to the top of the page on every route change. */
 function ScrollToTop() {
@@ -18,7 +19,8 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projet/:slug" element={<CaseStudy />} />
+        <Route path="/projet/cooko" element={<CaseStudy />} />
+        <Route path="/projet/recommandations" element={<CaseStudyReco />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

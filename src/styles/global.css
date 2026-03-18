@@ -56,10 +56,38 @@ a {
   text-decoration: none;
 }
 
+.project-card-link {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.project-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(28,26,23,0.10);
+}
+
 .project-card-link:focus-visible {
   outline: 2px solid var(--accent, #CC7D5E);
   outline-offset: 4px;
   border-radius: 20px;
+}
+
+/* Reusable hover utility classes */
+.hover-accent {
+  color: var(--text-tertiary);
+  transition: color 0.15s;
+}
+
+.hover-accent:hover {
+  color: var(--accent);
+}
+
+.hover-primary {
+  color: var(--text-tertiary);
+  transition: color 0.15s;
+}
+
+.hover-primary:hover {
+  color: var(--text-primary);
 }
 
 img {
@@ -772,6 +800,14 @@ img {
     width: 100%;
     height: 1px;
     margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
