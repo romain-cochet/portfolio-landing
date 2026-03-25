@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import '../styles/reco.css'
+import { useLocale, LanguageToggle } from '../i18n'
+import { caseStudyReco as content } from '../content/caseStudyReco'
 
 const metaTagStyle: React.CSSProperties = {
   fontSize: 12,
@@ -36,37 +38,40 @@ const sectionHeadingStyle: React.CSSProperties = {
 /* ── Illustration 1: Accessory Definition ── */
 
 function AccessoryDefinition() {
+  const { t } = useLocale()
+  const ill = content.illustrations.accessoryDefinition
+
   return (
     <div className="reco-illustration">
       <div className="reco-illustration-header">
-        <span className="reco-illustration-label">Définition</span>
+        <span className="reco-illustration-label">{t(ill.label)}</span>
         <p className="reco-illustration-title">
-          Indispensable vs complémentaire
+          {t(ill.title)}
         </p>
       </div>
 
       <div className="reco-def-columns">
         <div className="reco-def-col reco-def-col--dimmed">
-          <div className="reco-def-icon">🖥️</div>
-          <p className="reco-def-label">PC fixe + souris</p>
-          <p className="reco-def-title">Accessoire indispensable</p>
+          <div className="reco-def-icon">{ill.col1.icon}</div>
+          <p className="reco-def-label">{t(ill.col1.label)}</p>
+          <p className="reco-def-title">{t(ill.col1.title)}</p>
           <p className="reco-def-desc">
-            Le client y pense seul. Pas besoin de le convaincre.
+            {t(ill.col1.desc)}
           </p>
           <span className="reco-def-tag reco-def-tag--out">
-            Hors périmètre cross-sell
+            {t(ill.col1.tag)}
           </span>
         </div>
 
         <div className="reco-def-col">
-          <div className="reco-def-icon">💻</div>
-          <p className="reco-def-label">Portable + souris</p>
-          <p className="reco-def-title">Accessoire complémentaire</p>
+          <div className="reco-def-icon">{ill.col2.icon}</div>
+          <p className="reco-def-label">{t(ill.col2.label)}</p>
+          <p className="reco-def-title">{t(ill.col2.title)}</p>
           <p className="reco-def-desc">
-            Il faut donner une raison. C'est ici que le cross-sell intervient.
+            {t(ill.col2.desc)}
           </p>
           <span className="reco-def-tag reco-def-tag--in">
-            Périmètre cross-sell
+            {t(ill.col2.tag)}
           </span>
         </div>
       </div>
@@ -77,26 +82,23 @@ function AccessoryDefinition() {
 /* ── Illustration 2: Seller vs Digital Flow ── */
 
 function SellerVsDigitalFlow() {
-  const sellerSteps = [
-    'Comprendre le besoin',
-    'Accompagner le choix du produit',
-    'Sécuriser la décision',
-    'Réintroduire les accessoires',
-  ]
+  const { t, locale } = useLocale()
+  const ill = content.illustrations.sellerVsDigital
+  const sellerSteps = ill.sellerSteps[locale]
 
   return (
     <div className="reco-illustration">
       <div className="reco-illustration-header">
-        <span className="reco-illustration-label">Comparaison</span>
+        <span className="reco-illustration-label">{t(ill.label)}</span>
         <p className="reco-illustration-title">
-          Séquence vendeur vs parcours digital
+          {t(ill.title)}
         </p>
       </div>
 
       <div className="reco-flow-columns">
         {/* Seller column */}
         <div className="reco-flow-col">
-          <span className="reco-flow-col-title">Vendeur en magasin</span>
+          <span className="reco-flow-col-title">{t(ill.sellerTitle)}</span>
           {sellerSteps.map((step, i) => (
             <div key={i} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div className={`reco-flow-step${i === 3 ? ' reco-flow-step--highlight' : ''}`}>
@@ -108,14 +110,14 @@ function SellerVsDigitalFlow() {
               {i < sellerSteps.length - 1 && <div className="reco-flow-connector" />}
             </div>
           ))}
-          <p className="reco-flow-annotation">Séquentiel · Contextuel · Argumenté</p>
+          <p className="reco-flow-annotation">{t(ill.sellerAnnotation)}</p>
         </div>
 
         <div className="reco-flow-divider" />
 
         {/* Digital column */}
         <div className="reco-flow-col">
-          <span className="reco-flow-col-title">Parcours digital</span>
+          <span className="reco-flow-col-title">{t(ill.digitalTitle)}</span>
           <div className="reco-flow-step reco-flow-step--flat">
             <span className="reco-flow-num reco-flow-num--grey">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -125,7 +127,7 @@ function SellerVsDigitalFlow() {
               </svg>
             </span>
             <span className="reco-flow-step-text reco-flow-step-text--secondary">
-              Fiche produit → carrousel recos
+              {t(ill.digitalStep1)}
             </span>
           </div>
           <div className="reco-flow-connector" />
@@ -137,10 +139,10 @@ function SellerVsDigitalFlow() {
               </svg>
             </span>
             <span className="reco-flow-step-text reco-flow-step-text--secondary">
-              Panier → même carrousel recos
+              {t(ill.digitalStep2)}
             </span>
           </div>
-          <p className="reco-flow-annotation">Simultané · Pas de séquence · Pas de contexte</p>
+          <p className="reco-flow-annotation">{t(ill.digitalAnnotation)}</p>
         </div>
       </div>
     </div>
@@ -150,55 +152,41 @@ function SellerVsDigitalFlow() {
 /* ── Illustration 3: Effort × Timing Matrix ── */
 
 function EffortTimingMatrix() {
+  const { t } = useLocale()
+  const ill = content.illustrations.effortTimingMatrix
+
   return (
     <div className="reco-illustration">
       <div className="reco-illustration-header">
-        <span className="reco-illustration-label">Matrice</span>
+        <span className="reco-illustration-label">{t(ill.label)}</span>
         <p className="reco-illustration-title">
-          Effort d'accroche × timing naturel
+          {t(ill.title)}
         </p>
       </div>
 
       <div className="reco-matrix">
         {/* Y axis */}
         <div className="reco-matrix-axis-y" />
-        <span className="reco-matrix-label-y reco-matrix-label-y--top">Post-achat</span>
-        <span className="reco-matrix-label-y reco-matrix-label-y--bottom">À l'achat</span>
+        <span className="reco-matrix-label-y reco-matrix-label-y--top">{t(ill.axisY.top)}</span>
+        <span className="reco-matrix-label-y reco-matrix-label-y--bottom">{t(ill.axisY.bottom)}</span>
 
         {/* X axis */}
         <div className="reco-matrix-axis-x" />
-        <span className="reco-matrix-label-x reco-matrix-label-x--left">Effort faible</span>
-        <span className="reco-matrix-label-x reco-matrix-label-x--right">Effort fort</span>
+        <span className="reco-matrix-label-x reco-matrix-label-x--left">{t(ill.axisX.left)}</span>
+        <span className="reco-matrix-label-x reco-matrix-label-x--right">{t(ill.axisX.right)}</span>
 
         {/* Grid */}
         <div className="reco-matrix-grid">
-          {/* Top-left: faible effort + post-achat */}
-          <div className="reco-matrix-cell">
-            <span className="reco-matrix-cell-emoji">📦</span>
-            <span className="reco-matrix-cell-name">Le manque</span>
-            <span className="reco-matrix-cell-example">Consommables, recharges</span>
-          </div>
-
-          {/* Top-right: fort effort + post-achat */}
-          <div className="reco-matrix-cell">
-            <span className="reco-matrix-cell-emoji">💡</span>
-            <span className="reco-matrix-cell-name">La découverte</span>
-            <span className="reco-matrix-cell-example">Compléments d'usage</span>
-          </div>
-
-          {/* Bottom-left: faible effort + à l'achat */}
-          <div className="reco-matrix-cell">
-            <span className="reco-matrix-cell-emoji">⚡</span>
-            <span className="reco-matrix-cell-name">Le réflexe</span>
-            <span className="reco-matrix-cell-example">Câbles, protections</span>
-          </div>
-
-          {/* Bottom-right: fort effort + à l'achat — accent */}
-          <div className="reco-matrix-cell reco-matrix-cell--accent">
-            <span className="reco-matrix-cell-emoji">🎯</span>
-            <span className="reco-matrix-cell-name">Le conseil</span>
-            <span className="reco-matrix-cell-example">Accessoires techniques</span>
-          </div>
+          {ill.cells.map((cell, i) => (
+            <div
+              key={i}
+              className={`reco-matrix-cell${i === ill.cells.length - 1 ? ' reco-matrix-cell--accent' : ''}`}
+            >
+              <span className="reco-matrix-cell-emoji">{cell.emoji}</span>
+              <span className="reco-matrix-cell-name">{t(cell.name)}</span>
+              <span className="reco-matrix-cell-example">{t(cell.example)}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -208,12 +196,15 @@ function EffortTimingMatrix() {
 /* ── Illustration 4: Sequential Cart ── */
 
 function SequentialCart() {
+  const { t } = useLocale()
+  const ill = content.illustrations.sequentialCart
+
   return (
     <div className="reco-illustration">
       <div className="reco-illustration-header">
-        <span className="reco-illustration-label">Concept</span>
+        <span className="reco-illustration-label">{t(ill.label)}</span>
         <p className="reco-illustration-title">
-          Panier séquentiel en 3 étapes
+          {t(ill.title)}
         </p>
       </div>
 
@@ -221,8 +212,8 @@ function SequentialCart() {
         <div className="reco-cart-step">
           <span className="reco-cart-num reco-cart-num--accent">1</span>
           <div className="reco-cart-content">
-            <p className="reco-cart-step-title">Produit principal</p>
-            <p className="reco-cart-step-desc">Choix sécurisé, décision prise</p>
+            <p className="reco-cart-step-title">{t(ill.steps[0].title)}</p>
+            <p className="reco-cart-step-desc">{t(ill.steps[0].desc)}</p>
           </div>
         </div>
 
@@ -231,8 +222,8 @@ function SequentialCart() {
         <div className="reco-cart-step reco-cart-step--active">
           <span className="reco-cart-num reco-cart-num--accent">2</span>
           <div className="reco-cart-content">
-            <p className="reco-cart-step-title">Accessoires</p>
-            <p className="reco-cart-step-desc">Contextualisés, liés au produit choisi</p>
+            <p className="reco-cart-step-title">{t(ill.steps[1].title)}</p>
+            <p className="reco-cart-step-desc">{t(ill.steps[1].desc)}</p>
           </div>
         </div>
 
@@ -241,13 +232,13 @@ function SequentialCart() {
         <div className="reco-cart-step">
           <span className="reco-cart-num reco-cart-num--muted">3</span>
           <div className="reco-cart-content">
-            <p className="reco-cart-step-title">Services</p>
-            <p className="reco-cart-step-desc">Garantie, installation, livraison</p>
+            <p className="reco-cart-step-title">{t(ill.steps[2].title)}</p>
+            <p className="reco-cart-step-desc">{t(ill.steps[2].desc)}</p>
           </div>
         </div>
       </div>
 
-      <p className="reco-cart-annotation">La logique du vendeur, transposée au digital.</p>
+      <p className="reco-cart-annotation">{t(ill.annotation)}</p>
     </div>
   )
 }
@@ -255,39 +246,31 @@ function SequentialCart() {
 /* ── Illustration 5: Timeline Recommended vs Implemented ── */
 
 function ImplementationTimeline() {
+  const { t } = useLocale()
+  const ill = content.illustrations.implementationTimeline
+
   return (
     <div className="reco-illustration">
       <div className="reco-illustration-header">
-        <span className="reco-illustration-label">Résultat</span>
+        <span className="reco-illustration-label">{t(ill.label)}</span>
         <p className="reco-illustration-title">
-          Recommandé vs implémenté
+          {t(ill.title)}
         </p>
       </div>
 
       <div className="reco-timeline-items">
-        <div className="reco-timeline-item reco-timeline-item--done">
-          <span className="reco-timeline-dot reco-timeline-dot--done" />
-          <span className="reco-timeline-text">Pertinence technique des recommandations</span>
-          <span className="reco-timeline-status reco-timeline-status--done">Implémenté</span>
-        </div>
-
-        <div className="reco-timeline-item reco-timeline-item--backlog">
-          <span className="reco-timeline-dot reco-timeline-dot--backlog" />
-          <span className="reco-timeline-text">Découpage séquentiel du panier</span>
-          <span className="reco-timeline-status reco-timeline-status--backlog">Backlog</span>
-        </div>
-
-        <div className="reco-timeline-item reco-timeline-item--backlog">
-          <span className="reco-timeline-dot reco-timeline-dot--backlog" />
-          <span className="reco-timeline-text">Deux temporalités de cross-sell</span>
-          <span className="reco-timeline-status reco-timeline-status--backlog">Backlog</span>
-        </div>
-
-        <div className="reco-timeline-item reco-timeline-item--backlog">
-          <span className="reco-timeline-dot reco-timeline-dot--backlog" />
-          <span className="reco-timeline-text">Contextualisation du « pourquoi »</span>
-          <span className="reco-timeline-status reco-timeline-status--backlog">Backlog</span>
-        </div>
+        {ill.items.map((item, i) => (
+          <div
+            key={i}
+            className={`reco-timeline-item ${item.done ? 'reco-timeline-item--done' : 'reco-timeline-item--backlog'}`}
+          >
+            <span className={`reco-timeline-dot ${item.done ? 'reco-timeline-dot--done' : 'reco-timeline-dot--backlog'}`} />
+            <span className="reco-timeline-text">{t(item.text)}</span>
+            <span className={`reco-timeline-status ${item.done ? 'reco-timeline-status--done' : 'reco-timeline-status--backlog'}`}>
+              {t(item.status)}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -296,6 +279,8 @@ function ImplementationTimeline() {
 /* ── Main Case Study Component ── */
 
 export default function CaseStudyReco() {
+  const { t, locale } = useLocale()
+
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
 
@@ -372,17 +357,20 @@ export default function CaseStudyReco() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            Retour
+            {t(content.nav.back)}
           </Link>
 
-          <span style={{
-            fontSize: 17,
-            fontWeight: 500,
-            color: 'var(--text-primary)',
-            letterSpacing: '-0.01em',
-          }}>
-            Fnac/Darty
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <LanguageToggle />
+            <span style={{
+              fontSize: 17,
+              fontWeight: 500,
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.01em',
+            }}>
+              {t(content.nav.title)}
+            </span>
+          </div>
         </nav>
 
         {/* Main content */}
@@ -402,7 +390,7 @@ export default function CaseStudyReco() {
               color: 'var(--accent)',
               marginBottom: 10,
             }}>
-              Case Study 02
+              {t(content.hero.label)}
             </p>
 
             <h1 style={{
@@ -415,7 +403,7 @@ export default function CaseStudyReco() {
               opacity: 0,
               animation: 'fadeUp 0.7s var(--ease-out) 0.35s forwards',
             }}>
-              Recommandations accessoires
+              {t(content.hero.title)}
             </h1>
 
             <p style={{
@@ -428,7 +416,7 @@ export default function CaseStudyReco() {
               opacity: 0,
               animation: 'fadeUp 0.7s var(--ease-out) 0.42s forwards',
             }}>
-              Cross-sell data-informed chez Fnac/Darty
+              {t(content.hero.subtitle)}
             </p>
 
             <div style={{
@@ -438,7 +426,7 @@ export default function CaseStudyReco() {
               opacity: 0,
               animation: 'fadeUp 0.7s var(--ease-out) 0.5s forwards',
             }}>
-              {['UX Research', 'Data Analytics', 'Contentsquare', 'E-commerce'].map(tag => (
+              {content.hero.tags[locale].map(tag => (
                 <span key={tag} style={metaTagStyle}>{tag}</span>
               ))}
             </div>
@@ -448,121 +436,65 @@ export default function CaseStudyReco() {
           <article>
 
             {/* Section: Le problème */}
-            <h2 style={sectionHeadingStyle}>Le problème</h2>
+            <h2 style={sectionHeadingStyle}>{t(content.sections.problem.heading)}</h2>
 
-            <p style={bodyTextStyle}>
-              Un client ajoute un ordinateur portable à son panier. En dessous, un carrousel lui propose une souris, une housse, un câble HDMI, des écouteurs, une extension de garantie. Cinq suggestions, aucune explication. Il scrolle, il ne clique pas, il finalise sa commande. Le taux d'accroche accessoires stagne.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Ce n'est pas un problème de catalogue. Les bons accessoires existent. C'est un problème de présentation : tout est recommandé de la même façon, au même moment, sans distinction entre ce qui est indispensable et ce qui est complémentaire. Une souris pour un PC fixe, c'est un accessoire évident — le client y pense seul. Une souris pour un portable, c'est du cross-sell : il faut donner une raison. En ligne, cette distinction n'existe pas. Le système traite les deux cas de manière identique.
-            </p>
+            {content.sections.problem.paragraphs.map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             <AccessoryDefinition />
 
-            <p style={bodyTextStyle}>
-              En alternance au sein de l'équipe UX, la squad en charge du sujet m'a sollicité pour comprendre pourquoi le cross-sell fonctionnait mieux en magasin qu'en ligne, et identifier les leviers pour combler cet écart. Le projet s'est structuré en deux phases : une phase de compréhension terrain, puis une phase d'atelier avec les clients pour valider et affiner les hypothèses.
-            </p>
-
             {/* NDA Note */}
             <div className="reco-note" style={{ marginBottom: 48 }}>
-              <span className="reco-note-label">Note</span>
+              <span className="reco-note-label">{t(content.ndaNote.label)}</span>
               <p className="reco-note-text">
-                Ce case study porte sur un projet réalisé chez Fnac/Darty. Par respect des engagements de confidentialité, les données chiffrées, les écrans et les documents internes ne sont pas reproduits. Les exemples de produits sont génériques. Le récit se concentre sur la démarche, le raisonnement et les apprentissages.
+                {t(content.ndaNote.text)}
               </p>
             </div>
 
             {/* Section: Le terrain */}
-            <h2 style={sectionHeadingStyle}>Le terrain</h2>
+            <h2 style={sectionHeadingStyle}>{t(content.sections.terrain.heading)}</h2>
 
-            <p style={bodyTextStyle}>
-              Avant de regarder les données, il fallait comprendre la logique de ceux qui vendent avec succès. J'ai conduit des entretiens en présentiel dans deux magasins, avec une douzaine de vendeurs de rayons différents.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Ce qui ressort de ces échanges, c'est une séquence. Les vendeurs ne commencent jamais par les accessoires. Ils commencent par comprendre le besoin, ils accompagnent le choix du produit principal, ils sécurisent la décision. Ce n'est qu'après — une fois que le client est engagé sur son choix — qu'ils réintroduisent les compléments. Et ils le font toujours avec un lien explicite : cet accessoire-là va avec ce produit-là, pour cette raison-là.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Cette séquence n'existe nulle part dans le parcours digital. En ligne, les recommandations apparaissent dès la fiche produit, avant que le choix soit fait. Elles reviennent dans le panier, toujours sous la même forme : un carrousel horizontal, sans hiérarchie, sans contexte. Le vendeur construit un raisonnement ; le site affiche une liste.
-            </p>
+            {content.sections.terrain.paragraphs.slice(0, 3).map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             <SellerVsDigitalFlow />
 
-            <p style={bodyTextStyle}>
-              L'autre enseignement des entretiens : la notion d'accessoire n'est pas universelle. Elle dépend du produit principal. Un vendeur en rayon informatique ne recommande pas de la même façon qu'un vendeur en rayon cuisine. L'effort nécessaire pour convaincre, le moment où l'accessoire fait sens, le type d'argument qui fonctionne — tout change d'une catégorie à l'autre. Cette variabilité, le digital l'ignore complètement.
-            </p>
+            <p style={bodyTextStyle}>{t(content.sections.terrain.paragraphs[3])}</p>
 
             {/* Section: Les clients */}
-            <h2 style={sectionHeadingStyle}>Les clients</h2>
+            <h2 style={sectionHeadingStyle}>{t(content.sections.clients.heading)}</h2>
 
-            <p style={bodyTextStyle}>
-              Les entretiens vendeurs ont posé les hypothèses. Il fallait maintenant les confronter au comportement réel des clients.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Contentsquare a fourni la couche quantitative. L'analyse des parcours par catégorie de produit a révélé des différences significatives : les taux de clic sur les recommandations, les taux de scroll dans les zones d'accessoires, et les taux d'accroche au panier variaient fortement d'une catégorie à l'autre. Certaines typologies de produits généraient un engagement naturel avec les accessoires, d'autres presque aucun. Le comportement n'était pas uniforme, et pourtant l'interface l'était.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Un survey a été lancé en parallèle, avec plus de deux cents répondants. Il a permis de qualifier les profils d'acheteurs et de recruter pour la phase suivante. Cinq clients issus du survey ont participé à un focus group. L'objectif : comprendre ce qui les avait poussés — ou non — à ajouter des accessoires lors d'un achat récent.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Ce que le focus group a confirmé : le timing compte autant que la pertinence. Certains clients savent dès l'achat qu'ils auront besoin d'un accessoire, d'autres n'y pensent que dans les jours qui suivent, quand ils déballent le produit. La catégorie de produit conditionne ce timing. Et l'effort perçu — est-ce que je dois chercher moi-même, est-ce que c'est évident, est-ce que je comprends pourquoi — détermine si le client clique ou passe.
-            </p>
+            {content.sections.clients.paragraphs.slice(0, 4).map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             <EffortTimingMatrix />
 
-            <p style={bodyTextStyle}>
-              L'autre enseignement, moins attendu : les clients veulent être conseillés. Ils ne rejettent pas la recommandation en soi — ils rejettent la recommandation qui ressemble à une poussée commerciale. La ligne est fine entre « c'est vraiment utile pour ce que tu achètes » et « on veut juste te faire dépenser plus ». Quand la recommandation est perçue comme pertinente, elle est accueillie avec confiance. Les clients sont preneurs, à condition de comprendre pourquoi on leur propose ça. Ce n'est pas un rejet du cross-sell. C'est une exigence de contexte.
-            </p>
+            <p style={bodyTextStyle}>{t(content.sections.clients.paragraphs[4])}</p>
 
             {/* Section: Ce qu'on a recommandé */}
-            <h2 style={sectionHeadingStyle}>Ce qu'on a recommandé</h2>
+            <h2 style={sectionHeadingStyle}>{t(content.sections.recommended.heading)}</h2>
 
-            <p style={bodyTextStyle}>
-              La présentation aux squads et aux équipes impactées a été construite autour d'un principe : chaque insight est backé par de la data, chaque piste de solution est argumentée. Extraits vidéo des entretiens vendeurs, captures Contentsquare, données du survey. Pas de recommandation sans preuve.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Trois axes sont sortis du travail.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Le premier : deux temporalités de cross-sell. Le moment de l'achat et les quinze jours qui suivent ne servent pas les mêmes besoins. L'accessoire évident peut être proposé au panier. L'accessoire de confort, celui auquel on pense en déballant, relève d'une relance post-achat contextualisée. Traiter les deux dans le même carrousel, c'est ignorer que le besoin n'existe pas encore au moment où on le montre.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Le deuxième : un découpage séquentiel du panier. Plutôt que de tout afficher en même temps, accompagner le client étape par étape — d'abord le produit principal, puis les accessoires, puis les services. C'est la logique du vendeur transposée au digital. Elle permet de ne pas surcharger la décision et de contextualiser chaque proposition.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Le troisième : la contextualisation du « pourquoi ». Expliquer le lien entre l'accessoire et le produit choisi. Pas « les clients ont aussi acheté », mais « cette housse est conçue pour ce format d'écran ». Le vendeur le fait naturellement. Le site ne le fait pas.
-            </p>
+            {content.sections.recommended.paragraphs.map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             <SequentialCart />
 
             {/* Section: Ce qui s'est passé */}
-            <h2 style={sectionHeadingStyle}>Ce qui s'est passé</h2>
+            <h2 style={sectionHeadingStyle}>{t(content.sections.whatHappened.heading)}</h2>
 
-            <p style={bodyTextStyle}>
-              De ces trois axes, un seul a été implémenté : l'amélioration technique de la pertinence des recommandations. Le système a été ajusté pour supprimer les incohérences les plus visibles — ne plus recommander des AirPods sur un smartphone Android, par exemple. Un correctif nécessaire, mais qui ne touche qu'à la surface du problème.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Le découpage séquentiel du panier, les deux temporalités de cross-sell, la contextualisation — le cœur des recommandations — est resté en backlog. Les raisons sont un mélange de priorisation, de dépendances techniques et d'alignement entre équipes. Le système de recommandation existant ne permettait pas facilement ce type de restructuration. D'autres sujets sont passés devant sur la roadmap. Et les équipes n'étaient pas toutes alignées sur l'ampleur du changement à mener.
-            </p>
+            {content.sections.whatHappened.paragraphs.slice(0, 2).map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             <ImplementationTimeline />
 
-            <p style={bodyTextStyle}>
-              Le résultat : un impact faible et décevant par rapport aux possibilités identifiées. L'insight était solide, la data le supportait, les pistes étaient concrètes. Mais la distance entre une recommandation bien documentée et son implémentation ne dépend pas de la qualité de la recherche. Elle dépend de la capacité du livrable à s'insérer dans le cycle de décision des équipes qui doivent l'exécuter.
-            </p>
-
-            <p style={bodyTextStyle}>
-              Ce que ce projet m'a appris, c'est que livrer un bon diagnostic ne suffit pas. Le format compte autant que le fond. Si la recherche arrive comme un rapport qui « remonte », elle reste un input parmi d'autres. Si elle s'intègre dans le flux de travail de la squad — ses sprints, ses arbitrages, ses contraintes techniques — elle a une chance de devenir une décision. C'est une leçon que j'ai appliquée différemment sur les projets suivants.
-            </p>
+            {content.sections.whatHappened.paragraphs.slice(2).map((p, i) => (
+              <p key={i} style={bodyTextStyle}>{t(p)}</p>
+            ))}
 
             {/* Pull quote */}
             <div style={{
@@ -579,7 +511,7 @@ export default function CaseStudyReco() {
                 color: 'var(--text-primary)',
                 lineHeight: 1.55,
               }}>
-                La distance entre un insight solide et une décision produit ne dépend pas de la qualité de la recherche. Elle dépend de la capacité du livrable à s'intégrer dans le cycle de décision de ceux qui doivent l'exécuter.
+                {t(content.pullQuote)}
               </p>
             </div>
 
@@ -598,7 +530,7 @@ export default function CaseStudyReco() {
           flexWrap: 'wrap',
         }}>
           <span style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>
-            Dijon, France · Disponible remote
+            {t(content.footer.location)}
           </span>
           <div style={{ display: 'flex', gap: 20 }}>
             <a

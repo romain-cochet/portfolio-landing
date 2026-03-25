@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { useLocale, LanguageToggle } from '../i18n'
+import { home } from '../content/home'
 
 // Background orbs rendered outside the main content flow
 function BgOrbs() {
@@ -45,7 +47,7 @@ function ProjectCard({
   slug: string
   title: string
   description: string
-  tags: string[]
+  tags: readonly string[]
   year: string
 }) {
   return (
@@ -119,6 +121,8 @@ function ProjectCard({
 }
 
 export default function Home() {
+  const { t, locale } = useLocale()
+
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
       <BgOrbs />
@@ -149,28 +153,31 @@ export default function Home() {
             color: 'var(--text-primary)',
             letterSpacing: '-0.01em',
           }}>
-            Product Designer
+            {t(home.nav.role)}
           </span>
-          <span style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            fontSize: 12,
-            fontWeight: 500,
-            color: 'var(--text-tertiary)',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <LanguageToggle />
             <span style={{
-              width: 6,
-              height: 6,
-              borderRadius: '50%',
-              background: '#4CAF50',
-              display: 'inline-block',
-              animation: 'pulse 2.4s ease-in-out infinite',
-            }} />
-            Disponible
-          </span>
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              fontSize: 12,
+              fontWeight: 500,
+              color: 'var(--text-tertiary)',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+            }}>
+              <span style={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                background: '#4CAF50',
+                display: 'inline-block',
+                animation: 'pulse 2.4s ease-in-out infinite',
+              }} />
+              {t(home.nav.available)}
+            </span>
+          </div>
         </nav>
 
         {/* Main */}
@@ -190,7 +197,7 @@ export default function Home() {
             opacity: 0,
             animation: 'fadeUp 0.7s var(--ease-out) 0.3s forwards',
           }}>
-            Romain Cochet
+            {t(home.hero.name)}
           </h1>
 
           {/* Subtitle */}
@@ -204,7 +211,7 @@ export default function Home() {
             opacity: 0,
             animation: 'fadeUp 0.7s var(--ease-out) 0.4s forwards',
           }}>
-            Product designer, 8 ans d'expérience. Recherche, cadrage, décisions produit et suivi jusqu'à la livraison. Je travaille avec toute la squad, pas dans un coin de Figma.
+            {t(home.hero.subtitle)}
           </p>
 
           {/* Tags */}
@@ -216,9 +223,9 @@ export default function Home() {
             opacity: 0,
             animation: 'fadeUp 0.7s var(--ease-out) 0.5s forwards',
           }}>
-            {['Product Design', 'UX Research', 'Stratégie Produit'].map(tag => (
+            {home.hero.tags.map(tag => (
               <span
-                key={tag}
+                key={tag.en}
                 style={{
                   fontSize: 12,
                   fontWeight: 500,
@@ -232,7 +239,7 @@ export default function Home() {
                   borderRadius: 9999,
                 }}
               >
-                {tag}
+                {t(tag)}
               </span>
             ))}
           </div>
@@ -249,7 +256,7 @@ export default function Home() {
               color: 'var(--text-secondary)',
               lineHeight: 1.7,
             }}>
-              De Darty à un projet perso (Cooko), le fil rouge reste le même : le design qui compte, c'est celui qui survit au contact de la réalité — contraintes tech, retours terrain, arbitrages business. En dehors des écrans, quelque part entre Dijon et un sentier de rando.
+              {t(home.about.text)}
             </p>
           </div>
 
@@ -266,23 +273,23 @@ export default function Home() {
               color: 'var(--text-tertiary)',
               marginBottom: 20,
             }}>
-              Projets
+              {t(home.projects.sectionLabel)}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <ProjectCard
                 slug="cooko"
-                title="Cooko"
-                description="Application iOS de liste de courses collaborative. De la recherche utilisateur à la mise en production — parsing vocal, synchronisation temps réel et une expérience pensée pour le foyer."
-                tags={['iOS', 'Product Design', 'UX Research', 'React Native']}
-                year="2025"
+                title={t(home.projects.cooko.title)}
+                description={t(home.projects.cooko.description)}
+                tags={home.projects.cooko.tags[locale]}
+                year={home.projects.cooko.year}
               />
               <ProjectCard
                 slug="recommandations"
-                title="Recommandations accessoires"
-                description="Comment la data terrain et client a révélé que le cross-sell en ligne échouait parce qu'il ignorait le contexte d'achat. Étude vendeurs, analytics Contentsquare et focus group clients chez Fnac/Darty."
-                tags={['UX Research', 'Data Analytics', 'Contentsquare', 'Fnac/Darty']}
-                year="2024"
+                title={t(home.projects.reco.title)}
+                description={t(home.projects.reco.description)}
+                tags={home.projects.reco.tags[locale]}
+                year={home.projects.reco.year}
               />
             </div>
           </div>
@@ -302,7 +309,7 @@ export default function Home() {
           flexWrap: 'wrap',
         }}>
           <span style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>
-            Dijon, France · Disponible remote
+            {t(home.footer.location)}
           </span>
           <div style={{ display: 'flex', gap: 20 }}>
             <a
@@ -322,7 +329,7 @@ export default function Home() {
                 <rect x="2" y="9" width="4" height="12" />
                 <circle cx="4" cy="4" r="2" />
               </svg>
-              LinkedIn
+              {t(home.footer.linkedin)}
             </a>
             <a
               href="mailto:contact@romain-cochet.com"
@@ -338,7 +345,7 @@ export default function Home() {
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
-              Contact
+              {t(home.footer.contact)}
             </a>
           </div>
         </footer>

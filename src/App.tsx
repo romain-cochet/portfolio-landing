@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Home from './pages/Home'
 import CaseStudy from './pages/CaseStudy'
 import CaseStudyReco from './pages/CaseStudyReco'
+import { useLocale } from './i18n/LocaleContext'
 
 /** Scrolls to the top of the page on every route change. */
 function ScrollToTop() {
@@ -14,6 +15,12 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { locale } = useLocale()
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
+
   return (
     <BrowserRouter>
       <ScrollToTop />
