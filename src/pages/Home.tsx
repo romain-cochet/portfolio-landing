@@ -244,26 +244,10 @@ export default function Home() {
             ))}
           </div>
 
-          {/* About */}
-          <div style={{
-            marginBottom: 56,
-            opacity: 0,
-            animation: 'fadeUp 0.7s var(--ease-out) 0.55s forwards',
-          }}>
-            <p style={{
-              fontSize: 16,
-              fontWeight: 300,
-              color: 'var(--text-secondary)',
-              lineHeight: 1.7,
-            }}>
-              {t(home.about.text)}
-            </p>
-          </div>
-
           {/* Projects section */}
           <div style={{
             opacity: 0,
-            animation: 'fadeUp 0.7s var(--ease-out) 0.65s forwards',
+            animation: 'fadeUp 0.7s var(--ease-out) 0.55s forwards',
           }}>
             <p style={{
               fontSize: 11,
